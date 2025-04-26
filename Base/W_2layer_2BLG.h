@@ -17,12 +17,12 @@ double epsilon_2BLG(double q, double d, double e1, double e2, double e3, double 
 
 double W11_2BLG(double q, double d, double e1, double e2, double e3, double n, double n2)
 {
-    return (V11(q, e1, e2, e3, d, n)) + ( pow(V12(q, e1, e2, e3, d, n),2) - V11(q, e1, e2, e3, d, n) * V22(q, e1, e2, e3, d, n))*PIBLG(q*sqrt(n/n2)) / (epsilon_2BLG(q, d, e1, e2, e3, n, n2));
+    return ( V11(q, e1, e2, e3, d, n) + ( pow(V12(q, e1, e2, e3, d, n),2) - V11(q, e1, e2, e3, d, n) * V22(q, e1, e2, e3, d, n))*PIBLG(q*sqrt(n/n2)) ) / (epsilon_2BLG(q, d, e1, e2, e3, n, n2));
 }
 
 double W22_2BLG(double q, double d, double e1, double e2, double e3, double n, double n2)
 {
-    return (V22(q, e1, e2, e3, d, n)) + ( pow(V12(q, e1, e2, e3, d, n),2) - V11(q, e1, e2, e3, d, n) * V22(q, e1, e2, e3, d, n))*PIBLG(q) / (epsilon_2BLG(q, d, e1, e2, e3, n, n2));
+    return (V22(q, e1, e2, e3, d, n) + ( pow(V12(q, e1, e2, e3, d, n),2) - V11(q, e1, e2, e3, d, n) * V22(q, e1, e2, e3, d, n))*PIBLG(q)) / (epsilon_2BLG(q, d, e1, e2, e3, n, n2));
 }
 
 double W12_2BLG(double q, double d, double e1, double e2, double e3, double n, double n2)

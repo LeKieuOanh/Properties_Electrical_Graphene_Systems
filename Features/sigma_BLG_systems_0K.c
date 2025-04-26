@@ -8,7 +8,7 @@
 int main()
 {
     double  a0, r0,l, ni1, n1, n2;
-    double N0  = ( 2. * msao ) / (pi * pow(hbar,2));
+    // double N0  = ( 2. * msao ) / (pi * pow(hbar,2));
     a0 = 4.92 * 1e-8 ;
     l = 1e-7;
     n2 = 1e12;
@@ -26,7 +26,7 @@ int main()
     {
         ni1 = 0.95*1e12;
         r0 = r0_list[i];
-        char s1[] = "./results/d=";
+        char s1[] = "./results/BLG_systems_0K/BLG_MLG/d=";
         char s3[10];
         gcvt(d/l,10,s3);
         char s4[] = "nm/0.95e12/sigmar0=";
@@ -42,14 +42,14 @@ int main()
 
          for (n1 = 0; n1 <= 5e12; n1 += 0.02e12)
     {
-        fprintf(output,"%f \t %f\n",n1,sigma_2BLG(ni1,d,e1,e2,e3,n1,n2,r0));
+        fprintf(output,"%f \t %.5e \n",n1,sigma_BLG_MLG(ni1,d,e1,e2,e3,n1,n2,r0));
     }
     }
        for (int i= 0; i<=4; i++)
     {
         ni1 = 0.5 * 1e12;
         r0 = r0_list[i];
-        char s1[] = "./results/d=";
+        char s1[] = "./results/BLG_systems_0K/BLG_MLG/d=";
         char s3[10];
         gcvt(d/l,10,s3);
         char s4[] = "nm/0.5e12/sigmar0=";
@@ -65,7 +65,7 @@ int main()
 
          for (n1 = 0; n1 <= 5e12; n1 += 0.02e12)
     {
-        fprintf(output,"%f \t %f\n",n1,sigma_2BLG(ni1,d,e1,e2,e3,n1,n2,r0));
+        fprintf(output,"%f \t %.5e\n",n1,sigma_BLG_MLG(ni1,d,e1,e2,e3,n1,n2,r0));
     }
     }
     }

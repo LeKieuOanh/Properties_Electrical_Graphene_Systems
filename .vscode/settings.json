@@ -3,6 +3,9 @@
         "v_2layer.h": "c",
         "stdio.h": "c",
         "pola_blg_0k.h": "c",
-        "sigma_blg_systems_0k.h": "c"
+        "sigma_blg_systems_0k.h": "c",
+        "tau_blg_system.h": "c",
+        "w_2layer_blg_mlg.h": "c",
+        "w_2layer_2blg.h": "c"
     }
 }

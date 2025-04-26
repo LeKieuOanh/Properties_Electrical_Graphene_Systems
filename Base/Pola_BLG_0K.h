@@ -21,7 +21,6 @@ double g0(double q1)
     return (( sqrt(4. + pow(q1,4)) / 2.) - log((1. + sqrt( 1. + pow(q1,4)/4.)) / 2.)) ;
 }
 
-
 double PIBLG(double q1)
 {
     double N0  = ( 2. * msao ) / (pi * pow(hbar,2));
