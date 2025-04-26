@@ -24,7 +24,7 @@ double V22(double q,double e1, double e2, double e3, double d, double n){
 }
 
 double V12(double q,double e1, double e2, double e3, double d, double n){
-    return heso(n, q) * e2 / MS(q, e1, e2, e3, d, n);
+    return heso(n, q) * e2 / (cosh(q * sqrt(pi * n)*d) *MS(q, e1, e2, e3, d, n));
 }
 
 
