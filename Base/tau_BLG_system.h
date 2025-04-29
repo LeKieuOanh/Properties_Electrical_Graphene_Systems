@@ -4,6 +4,8 @@
 #include"W_2layer_2BLG.h"
 #include"W_2layer_BLG_MLG.h"
 #include"W_2layer_BLG_2DEG.h"
+#include"W_3layer_3BLG_T.h"
+
 #include"S_func.h"
 #include"gaulegf.h"
 
@@ -84,4 +86,28 @@ double tau_BLG_2DEG(double ni1,double d, double e1, double e2, double e3, double
     }
     
   return result; 
+}
+
+
+// 3BLG - T
+double ftau11_3BLG_T(double q, double ni, double d, double e1, double e2, double e3, double e4, double n, double r0, double t)
+{
+    double EF = pi * n * hbar * hbar / (2 * msao);
+    return (pi * n * ni * q * q * pow(1. - q * q / 2., 2) * pow(fabs(W11_3BLG_T(q, n, d, e1, e2, e3, e4, t)), 2) * S(q, ni, n, r0)) / (sqrt(4 - q * q) * 2 * pi * hbar * EF);
+}
+
+double tau11_3BLG_T(double ni, double d, double e1, double e2, double e3, double e4, double n, double r0, double t)
+{
+    int i, j;
+    double result;
+    double x[9000], w[9000];
+    i = 100.;
+    gaulegf(0., 2., x, w, i);
+    result = 0.;
+    for (j = 1; j <= i; j++)
+    {
+        result += w[j] * ftau11_3BLG_T(x[j], ni, d, e1, e2, e3, e4, n, r0, t);
+    }
+
+    return result;
 }

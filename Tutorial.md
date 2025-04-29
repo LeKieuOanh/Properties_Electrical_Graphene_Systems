@@ -14,3 +14,4 @@ Properties Electrical of Graphene, Bilayer Graphenn, Two dimensions electric gas
 
 # Features
 - sigma_2BLG
+- df0dE

@@ -1,3 +1,6 @@
+#ifndef W_2layer_T_h
+#define W_3layer_T_h
+
 #include <stdio.h>
 #include <math.h>
 #include"V_2layer.h"
@@ -26,3 +29,5 @@ double W12(double q, double d, double e1, double e2, double e3, double n, double
 {
     return V12(q, e1, e2, e3, d, n)/ (epsilon(q, d, e1, e2, e3, n, n2, t));
 }
+
+#endif
