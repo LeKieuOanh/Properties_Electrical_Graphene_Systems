@@ -1,3 +1,6 @@
+#ifndef S_func_h
+#define S_func_h
+
 #include <stdio.h>
 #include <math.h>
 
@@ -43,3 +46,5 @@ double S(double q, double ni, double n, double r0)
 {
     return 1. - 2 * pi * ni * r0 * J(q * r0 * sqrt(pi * n)) / (q * sqrt(pi * n));
 }
+
+#endif

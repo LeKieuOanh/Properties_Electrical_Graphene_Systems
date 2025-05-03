@@ -3,7 +3,7 @@
 #include <string.h>
 #include <stdlib.h>
 
-#include"../Base/sigma_BLG_systems_0K.h"
+#include"../Base/electrical_BLG_systems_0K.h"
 
 int main()
 {
