@@ -41,21 +41,43 @@ double ni	= 1e11;		//mat do hat tai tren lop thu i
 double s	= 1;		// The hoa hoc /mu
 //------------------------------------------------------------------------------
 int main(){
-	double d, t1, sigma;
-	d = 1;
+	double E1, d, t1, i1, i2, i, Sd; //x la E/EF
+	d = 1; //nm
 	FILE *output;
-	output=fopen ("2BLG_Sigma1_30.dat","w+");
- 		for (t1 = 0.1; t1 <= 0.9; t1 += 0.1){
- 		   	printf("%.2f\n	", t1);	//Hien thi tren terminal
- 		   	fprintf(output, "%f ", t1);
- 		   	sigma = sigma1(d*1e-7, t1);
- 		   	printf("%.10e\n", sigma);
- 		   	fprintf(output,"%.10e ", sigma);
-			printf("\n");			//Hien thi tren terminal
+	output=fopen ("2BLG_L1_Sd.dat","w+");
+		for (t1 = 0.01; t1 <= 0.1; t1 += 0.01){
+ 			printf("%.2f\n	", t1);						//Hien thi tren terminal
+ 			fprintf(output, "%f ", t1);
+ 			i = i1 = i2 = Sd = 0;
+ 			for (E1 = 1; E1 <= 30; E1 += 0.5){
+ 				printf("%2.1f ", E1);					//Hien thi tren terminal
+ 				i = df(E1, t1) * E1/tau_rev(d*1e-7, t1, E1);
+				i2 = i2 + i;
+				i1 = i1 + i*E1;
+			}
+			Sd = (i1/i2-s)/t1;							//kB/e, K^-1
+			//Sd = kB*(i1/i2-s)/(elec*t1);				//V/K
+			printf("%.20e\n", Sd);						//Hien thi tren terminal
+ 			fprintf(output,"%.20e", Sd);
+			fprintf(output, "\n");
+        }
+        for (t1 = 0.2; t1 <= 0.9; t1 += 0.1){
+ 			printf("%.2f\n	", t1);						//Hien thi tren terminal
+ 			fprintf(output, "%f ", t1);
+ 			i = i1 = i2 = Sd = 0;
+ 			for (E1 = 1; E1 <= 30; E1 += 0.5){
+ 				printf("%2.1f ", E1);					//Hien thi tren terminal
+ 				i = df(E1, t1) * E1/tau_rev(d*1e-7, t1, E1);
+				i2 = i2 + i;
+				i1 = i1 + i*E1;
+			}
+			Sd = (i1/i2-s)/t1;							//kB/e, K^-1
+			printf("%.20e\n", Sd);						//Hien thi tren terminal
+ 			fprintf(output,"%.20e", Sd);
 			fprintf(output, "\n");
         }
 	fclose(output);
-	printf("\nfin\nFile: 2BLG_Sigma1.dat\a");
+	printf("\nfin\a");
 	return 0;
 }
 //====================THE POLARIZABILITY FUNCTION===============================
@@ -68,7 +90,7 @@ void gaulegf(double x1, double x2, double x[], double w[], int n){
 	xl = 0.5*(x2-x1);
 	for (i = 1; i <= m; i++){
     z = cos(3.141592654*((double)i-0.25)/((double)n+0.5));
-    while (1){
+    while(1){
     	p1 = 1.0;
     	p2 = 0.0;
     	for (j = 1; j <= n; j++){
@@ -127,7 +149,7 @@ double polar(double a, double b, double q1, double t1){
 	}
 	return sum;
 }
-double PI(double q1, double t1){ //polarinfi
+double PI(double q1, double t1){ //polarinfi //Pi/D0
 	double kt, kq, gt1, gt2, gt, a, b;
 	int i;
 	if (q1 <= 0.001)
@@ -210,7 +232,7 @@ double ftau_rev(double q1, double k1, double d, double t1){ //ham duoi dau tich 
 	double kq;
 	kq = (q1*q1*	pow((1-2*pow(q1/(2*k1), 2)), 2)	/	(sqrt(4*k1*k1-q1*q1)))	*	pow(W11(q1, d, t1), 2); //tau cho T khac 0: k = k1.kF = sqrt(E1)*kF //chua co he so kF: kF.ftau_rev
 	return kq;
-}
+} //OK
 double tau_rev(double d, double t1, double E1){ // ham tich phan chua co he so phia truoc
 	int i, j, ka;
 	double sum;
@@ -221,17 +243,5 @@ double tau_rev(double d, double t1, double E1){ // ham tich phan chua co he so p
 	for (j = 1; j <= i; j++){
     	sum = sum + w[j] * ftau_rev(z[j], sqrt(E1), d, t1); //k1=sqrt(E1) dq=kF.dq1; kF^2.ftau_rev.dq1
     }
-	return sum;
-}
-double sigma1(double d, double t1){
-	int i, j;
-	double sum;
-	double x[1000], w[1000];
-	i = 35.;//35
-	gaulegf(0., 21, x, w, i);
-	sum = 0.0;
-	for (j = 1; j <= i; j++){
-    	sum = sum + w[j] * 2*pow(pi*msao1, 2) * pow(hbar, 4) * n/ni * x[j] * df(x[j], t1) / tau_rev(d, t1, x[j]); //x la E1
-	}
 	return sum;
 }

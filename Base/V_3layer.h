@@ -1,3 +1,6 @@
+#ifndef V_3layer_h
+#define V_3layer_h
+
 #include <stdio.h>
 #include <math.h>
 
@@ -34,7 +37,7 @@ double f23(double q, double d, double k1, double k2, double k3)
     return 8 * k3 * exp(q * d) * (k2 * cosh(q * d) + k1 * sinh(q * d));
 }
 
-double heso(double q)
+double heso_3layer(double q)
 {
     return 2 * pi * pow(elec, 2) / q;
 }
@@ -46,30 +49,32 @@ double MS_V(double q, double d, double k1, double k2, double k3, double k4)
 
 double V11(double q, double d, double k1, double k2, double k3, double k4)
 {
-    return heso(q) * f11(q, d, k2, k3, k4) / MS_V(q, d, k1, k2, k3, k4);
+    return heso_3layer(q) * f11(q, d, k2, k3, k4) / MS_V(q, d, k1, k2, k3, k4);
 }
 
 double V22(double q, double d, double k1, double k2, double k3, double k4)
 {
-    return heso(q) * f22(q, d, k1, k2, k3, k4) / MS_V(q, d, k1, k2, k3, k4);
+    return heso_3layer(q) * f22(q, d, k1, k2, k3, k4) / MS_V(q, d, k1, k2, k3, k4);
 }
 
 double V33(double q, double d, double k1, double k2, double k3, double k4)
 {
-    return heso(q) * f33(q, d, k1, k2, k3) / MS_V(q, d, k1, k2, k3, k4);
+    return heso_3layer(q) * f33(q, d, k1, k2, k3) / MS_V(q, d, k1, k2, k3, k4);
 }
 
 double V12(double q, double d, double k1, double k2, double k3, double k4)
 {
-    return heso(q) * f12(q, d, k2, k3, k4) / MS_V(q, d, k1, k2, k3, k4);
+    return heso_3layer(q) * f12(q, d, k2, k3, k4) / MS_V(q, d, k1, k2, k3, k4);
 }
 
 double V13(double q, double d, double k1, double k2, double k3, double k4)
 {
-    return heso(q) * f13(q, d, k2, k3) / MS_V(q, d, k1, k2, k3, k4);
+    return heso_3layer(q) * f13(q, d, k2, k3) / MS_V(q, d, k1, k2, k3, k4);
 }
 
 double V23(double q, double d, double k1, double k2, double k3, double k4)
 {
-    return heso(q) * f23(q, d, k1, k2, k3) / MS_V(q, d, k1, k2, k3, k4);
+    return heso_3layer(q) * f23(q, d, k1, k2, k3) / MS_V(q, d, k1, k2, k3, k4);
 }
+
+#endif
