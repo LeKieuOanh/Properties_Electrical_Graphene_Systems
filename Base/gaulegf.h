@@ -1,3 +1,6 @@
+#ifndef gaulegf_h
+#define gaulegf_h
+
 #include<stdio.h>
 #include<math.h>
 
@@ -35,3 +38,5 @@ void gaulegf(double x1, double x2, double x[], double w[], int n)
     w[n+1-i] = w[i];
   }
 }
+
+#endif
