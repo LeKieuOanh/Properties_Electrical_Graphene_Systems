@@ -246,32 +246,48 @@ int main()
     ni1 = 0.45e12;
     ni2 = 0;
     n2 = 1e12;
-    d1 = 6e-7;
+    double d_list[2] = {3e-7, 6e-7};
+    double w1_list[2] = {1e-7, 2e-7};
+    // double w2_list[2] = {2e-7, 4e-7}; // uncomment when use
     double r1_list[3] = {0, 5*a0, 10*a0};
     r02 = 0;
     e21 = 4;
-    double e22_list[2] = {7.5, 22};
-    w1 = 2e-7;
+    double e22_list[3] = {4, 7.5, 22};
     FILE *output;	
 
+    for (int i=0; i<=1; i++)
+    {
+        d1 = d_list[i];
+        w1 = w1_list[i];
+        // w1 = w2_list[i];  // uncomment when use
         // Calcalate for r0 different;
-        for (int j=0; j<=1; j++)
+        for (int j=0; j<=2; j++)
         {
             e22 = e22_list[j];
-            char s1[] = "./results/MLG_systems_0K/MLG_MLG/2spacer/d=6-ni1=0.45e12";
-            char s5[] = "-e21=";
-            char s6[20];
-            gcvt(e21, 20, s6);
-            char s9[] = "-e22=";
-            char s10[20];
-            gcvt(e22, 20, s10);
+            char s1[] = "./results/MLG_systems_0K/MLG_MLG/2spacer/data/ni1=0.45e12";
+            char s2[] = "-d=";
+            char s3[20];
+            gcvt(d1/1e-7, 20, s3);
+            char s4[] = "-w=";
+            char s5[20];
+            gcvt(w1/1e-7, 20, s5);
+            char s6[] = "-e21=";
+            char s7[20];
+            gcvt(e21, 20, s7);
+            char s8[] = "-e22=";
+            char s9[20];
+            gcvt(e22, 20, s9);
 
             char s[100]="";
             strcat(s,s1);
+            strcat(s,s2);
+            strcat(s,s3);
+            strcat(s,s4);
             strcat(s,s5);
             strcat(s,s6);
+            strcat(s,s7);
+            strcat(s,s8);
             strcat(s,s9);
-            strcat(s,s10);
             strcat(s,".txt");
             output = fopen(s,"w+");
 
@@ -280,7 +296,7 @@ int main()
                 fprintf(output,"%f \t %.5e \t %.5e  \t %.5e \n",n1/1e12,sigma_2spacer_2MLG(w1,n1,n2,e1,e21,e22,e3,d1,ni1,r1_list[0],ni2,r02), sigma_2spacer_2MLG(w1,n1,n2,e1,e21,e22,e3,d1,ni1,r1_list[1],ni2,r02), sigma_2spacer_2MLG(w1,n1,n2,e1,e21,e22,e3,d1,ni1,r1_list[2],ni2,r02));
             }
         }
-
+    }
 
 
     fclose(output);
