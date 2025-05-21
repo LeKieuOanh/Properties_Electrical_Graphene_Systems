@@ -7,6 +7,7 @@
         "tau_blg_system.h": "c",
         "w_2layer_blg_mlg.h": "c",
         "w_2layer_2blg.h": "c",
-        "gaulegf.h": "c"
+        "gaulegf.h": "c",
+        "tau_mlg_system.h": "c"
     }
 }
